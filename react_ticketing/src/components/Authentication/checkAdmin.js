@@ -13,7 +13,9 @@ export const checkAdmin = (Component) => {
       }
     }, [user, navigate]);
 
-    return user && user.username === "karun@admin.com" ? <Component {...props} /> : null;
+    return user && user.username === "karun@admin.com" ? (
+      <Component {...props} />
+    ) : null;
   }
 
   return Wrapper;

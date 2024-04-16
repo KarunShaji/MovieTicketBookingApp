@@ -42,7 +42,7 @@ function AddMovie() {
         if (response.data && response.data.message) {
           alert(response.data.message);
         } else {
-          alert("Movie added successfully!"); // Provide a default message if 'message' attribute is not present
+          alert("Movie added successfully!");
         }
         navigate("/admin/dashboard");
       })
@@ -144,15 +144,13 @@ function AddMovie() {
             </div>
             <br />
             <div className="form-group">
-              <label>
-                Availability :
-              </label>
+              <label>Availability :</label>
               &nbsp;
               <input
                 type="checkbox"
                 style={{
-                  verticalAlign: 'middle',
-                  marginLeft:"5px",
+                  verticalAlign: "middle",
+                  marginLeft: "5px",
                   width: "20px",
                   height: "20px",
                   border: "2px solid #333",

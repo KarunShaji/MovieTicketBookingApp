@@ -20,7 +20,7 @@ function ViewMovie() {
     availability: "",
     price: "",
     show_time: "",
-    trailer: "", // Add trailer property
+    trailer: "",
   });
   const [numTickets, setNumTickets] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -68,12 +68,10 @@ function ViewMovie() {
     }
   }, [post.release_date]);
 
-  // Function to generate booking ID
   const generateBookingId = () => {
     return Math.floor(10000000 + Math.random() * 90000000).toString();
   };
 
-  // Function to handle booking
   const handleBooking = async () => {
     if (!showDate) {
       setDateError(true);
@@ -108,7 +106,6 @@ function ViewMovie() {
     }
   };
 
-  // Function to generate seats
   const generateSeats = (numTickets) => {
     let seats = [];
     for (let i = 1; i <= numTickets; i++) {
@@ -116,6 +113,8 @@ function ViewMovie() {
     }
     return seats.join(", ");
   };
+
+  // RazorPay
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -190,7 +189,6 @@ function ViewMovie() {
     }
   };
 
-  // Function to convert time to 12-hour format
   function convertTo12HourFormat(time) {
     const [hours, minutes] = time.split(":").map(Number);
     const period = hours >= 12 ? "PM" : "AM";

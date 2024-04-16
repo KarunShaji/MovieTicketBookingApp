@@ -12,7 +12,6 @@ function MyBookings() {
   const [qrCodes, setQrCodes] = useState({});
   const user = useSelector((store) => store.auth.user);
 
-  // Function to convert time from 24-hour format to 12-hour format
   const convertTo12HourFormat = (time) => {
     const [hours, minutes] = time.split(":");
     let period = "AM";
@@ -42,7 +41,6 @@ function MyBookings() {
   }, [bookings, user]);
 
   useEffect(() => {
-    // Fetch booking details and QR codes
     const fetchMovieDetails = async (movieId) => {
       try {
         const response = await axios.get(
@@ -119,7 +117,9 @@ function MyBookings() {
                   <p>Movie Date : {booking.show_date}</p>
                 </div>
                 <div>
-                  <p>Movie Time : {convertTo12HourFormat(booking.booking_time)}</p>
+                  <p>
+                    Movie Time : {convertTo12HourFormat(booking.booking_time)}
+                  </p>
                 </div>
                 <div className="movie-booking-date">
                   <p>Booking Date : {booking.booking_date}</p>

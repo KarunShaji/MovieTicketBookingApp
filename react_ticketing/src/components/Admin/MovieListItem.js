@@ -18,7 +18,7 @@ function MovieListItem({ movie, refresh, title, poster }) {
       })
       .then((response) => {
         refresh();
-        setShowModal(false); // Close the modal after successful deletion
+        setShowModal(false);
       })
       .catch((error) => {
         console.error("Error deleting Movie:", error);

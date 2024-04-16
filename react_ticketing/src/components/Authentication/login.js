@@ -26,7 +26,7 @@ function Login() {
           token: response.data.token,
           userType: response.data.user_type,
         };
-        
+
         dispatch(setUser(user));
 
         if (

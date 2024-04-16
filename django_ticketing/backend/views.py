@@ -172,14 +172,10 @@ def accept_booking(request, pk):
         qr_data = f"Booking ID : {booking.id}\nMovie : {movie.title}\nDate : {booking.show_date}\nTime : {booking.booking_time}\nSeats : {booking.seats_booked}"
         qr.add_data(qr_data)
         qr.make(fit=True)
-
-        # Create BytesIO object to store QR code image
         qr_img = BytesIO()
         img = qr.make_image(fill_color="black", back_color="white")
         img.save(qr_img)
         qr_img.seek(0)
-
-        # Save the QR code image to the booking instance
         booking.booking_qr.save(f"booking_{booking.id}.png", File(qr_img))
 
 
@@ -192,29 +188,27 @@ def accept_booking(request, pk):
 
         pdf_content = BytesIO()
         pisa.CreatePDF(BytesIO(html_content.encode('UTF-8')), dest=pdf_content)
-
-        # Save PDF in BookingRegister model using ContentFile
         booking.booking_pdf.save(f"booking_{booking.id}.pdf", ContentFile(pdf_content.getvalue()))
         
         # Mailing
 
-        # subject = 'Booking Confirmation'
-        # to_email = request.user.email
-        # from_email = 'karun.cinemate@admin.com'
-        # email_context = {'booking': booking, 'movie': movie}
-        # email_body_html = render_to_string('email_template.html', email_context)
-        # email_body_text = strip_tags(email_body_html)
+        subject = 'Booking Confirmation'
+        to_email = request.user.email
+        from_email = 'karun.cinemate@admin.com'
+        email_context = {'booking': booking, 'movie': movie}
+        email_body_html = render_to_string('email_template.html', email_context)
+        email_body_text = strip_tags(email_body_html)
 
-        # email = EmailMessage(
-        #     subject,
-        #     email_body_text,
-        #     from_email,
-        #     [to_email],
-        # )
-        # pdf_file_path = booking.booking_pdf.path
-        # email.attach_file(pdf_file_path, 'application/pdf')
+        email = EmailMessage(
+            subject,
+            email_body_text,
+            from_email,
+            [to_email],
+        )
+        pdf_file_path = booking.booking_pdf.path
+        email.attach_file(pdf_file_path, 'application/pdf')
 
-        # email.send()
+        email.send()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -262,7 +256,6 @@ def new_payment(request):
                 "payment_capture": "1"
             })
 
-            # Construct the response data
             response_data = {
                 "callback_url": "http://127.0.0.1:8000/api/callback/",
                 "razorpay_key": "rzp_test_WywoaZPJVI7Dfo",
@@ -273,10 +266,10 @@ def new_payment(request):
             return JsonResponse(response_data)
 
         except Exception as e:
-            # Handle any errors gracefully
+            
             return JsonResponse({'error': str(e)}, status=500)
 
-    # Return error response for non-POST requests
+    
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
@@ -315,12 +308,8 @@ def generate_pdf(request,pk):
 
     template = get_template('django_pdf_ticket.html')
     html = template.render({'product': product})
-
     buffer = BytesIO()
-
     pisa_status = pisa.CreatePDF(html, dest=buffer)
-
-    # Return PDF document through a Django HTTP response.
     if pisa_status.err:
         return HttpResponse('PDF creation error!')
     else:
