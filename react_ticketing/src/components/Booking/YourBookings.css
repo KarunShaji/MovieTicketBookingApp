@@ -1,0 +1,61 @@
+.booking-card {
+  display: flex;
+  background: linear-gradient(to left, #a9f1df, #ffbbbb);
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 30px;
+  padding: 15px 15px;
+  border: 1px solid #0000004f;
+  border-radius: 10px;
+}
+
+.movie-details {
+  flex: 1;
+  padding-top: 40px;
+  padding-left: 20px;
+}
+
+.movie-title {
+  font-weight: bolder;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  max-width: 260px;
+}
+
+.movie-poster img {
+  width: 260px;
+  height: 350px;
+  border-radius: 10px;
+}
+
+.booking-id {
+  margin-bottom: 5px;
+}
+
+.booking-date {
+  margin-bottom: 5px;
+}
+
+.total-amount {
+  margin-top: 5px;
+}
+
+.qr-code{
+  flex: 0 0 auto;
+  padding-left: 10px;
+
+}
+
+.qr-code .qr-code-right{
+  margin-left: auto; 
+}
+
+.qr-code img{
+height: 200px;
+margin-right: 35px;
+margin-left: 6px;
+}
+.pdf-download{
+
+  margin-right: 80px;
+}

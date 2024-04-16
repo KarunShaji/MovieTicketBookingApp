@@ -1,0 +1,43 @@
+body{
+  margin: 0;
+}
+.fullbody {
+  width: 100%;
+}
+
+.static {
+  margin-top: 20px;
+}
+
+.logic {
+  text-align: center;
+}
+.counter {
+  margin-bottom: 20px;
+}
+
+/* CSS for modal close button */
+.close {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+}
+
+.close button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+.show-time-container {
+  display: flex;
+  align-items: center; 
+}
+
+.show-time-container label {
+  margin-right: 10px; 
+}
+

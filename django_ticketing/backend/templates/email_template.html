@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ticket</title>
+  </head>
+  <body>
+    <p>
+      Dear {{ booking.user.username }}, <br><br>
+      Congratulations! Your booking for the movie "<b>{{ movie.title }}</b>" has been confirmed. <br>
+      We're excited to have you join us for this screening. Here are the details of your booking: <br><br>
+      <b>Movie Information:</b> <br>
+      Show: {{ movie.movie_id }}  <br>
+      Booking ID: {{ booking.id }}  <br>
+      Movie Date: {{ booking.show_date }}  <br><br>
+      <b>Booking Details:</b> <br>
+      Number of Tickets: {{ booking.quantity }}  <br>
+      Amount Paid: {{ booking.total_price }} <br>
+      <b>Seats:</b> {{ booking.seats_booked }} <br><br>
+      Thank you for choosing Cinemate. We hope you have a fantastic time at the movies! <br><br>
+      MovieAdmin <br>
+      Cinemate <br>
+    </p>
+  </body>
+</html>
