@@ -25,8 +25,8 @@ function MovieListUser({ movie }) {
         <div className="price">
           Rs : <b>{movie.price}</b>
         </div>
-        <div className="time">
-          Genre :&nbsp;<b>{movie.genre}</b>
+        <div className="genre-container">
+          <div className="genre"><b>{movie.genre}</b></div>
         </div>
       </div>
     </div>

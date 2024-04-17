@@ -217,8 +217,8 @@ function ViewMovie() {
                       {post.trailer && (
                         <iframe
                           title="YouTube Trailer"
-                          width="560"
-                          height="450"
+                          width="560px"
+                          height="450px"
                           src={post.trailer}
                           frameBorder="0"
                           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

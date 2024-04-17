@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import { useSelector } from "react-redux";
+import Select from "react-select";
 import { checkAdmin } from "../Authentication/checkAdmin";
 
 function EditMovie() {
@@ -15,11 +16,17 @@ function EditMovie() {
   const [availability, setAvailability] = useState(false);
   const [price, setPrice] = useState("");
   const [trailer, setTrailer] = useState("");
-  const [showTime, setShowTime] = useState("");
+  const [showTime, setShowTime] = useState([]);
 
-  
   const user = useSelector((store) => store.auth.user);
   const navigate = useNavigate();
+
+  const fixedShowTimeOptions = [
+    { value: "11:30", label: "11:30 AM" },
+    { value: "14:30", label: "2:30 PM" },
+    { value: "17:00", label: "5:00 PM" },
+    { value: "21:00", label: "9:00 PM" },
+  ];
 
   useEffect(() => {
     if (user && user.token) {
@@ -36,9 +43,14 @@ function EditMovie() {
           setGenre(response.data.genre);
           setReleaseDate(response.data.release_date);
           setAvailability(response.data.availability);
-          setTrailer(response.data.trailer)
+          setTrailer(response.data.trailer);
           setPrice(response.data.price);
-          setShowTime(response.data.show_time);
+          setShowTime(
+            response.data.show_time.map((time) => ({
+              value: time,
+              label: `${time} AM`,
+            }))
+          );
         })
         .catch((error) => {
           console.error("Error fetching movie:", error);
@@ -51,15 +63,15 @@ function EditMovie() {
       .put(
         `http://127.0.0.1:8000/api/update/${postId}/`,
         {
-            title: title,
-            description: description,
-            setPoster: poster,
-            genre: genre,
-            release_date: releaseDate,
-            availability: availability,
-            price: price,
-            trailer: trailer,
-            show_time: showTime,
+          title: title,
+          description: description,
+          setPoster: poster,
+          genre: genre,
+          release_date: releaseDate,
+          availability: availability,
+          price: price,
+          trailer: trailer,
+          show_time: showTime.map((time) => time.value),
         },
         {
           headers: {
@@ -182,19 +194,14 @@ function EditMovie() {
             <br />
             <div className="form-group">
               <label>Show Time :</label>
-              <select
+              <Select
+                isMulti
+                options={fixedShowTimeOptions}
                 value={showTime}
-                onChange={(event) => setShowTime(event.target.value)}
-                className="form-control"
-              >
-                <option value="" disabled>
-                  select-time
-                </option>
-                <option value="11:30">11:30 AM</option>
-                <option value="14:30">2:30 PM</option>
-                <option value="17:00">5:00 PM</option>
-                <option value="21:00">9:00 PM</option>
-              </select>
+                onChange={setShowTime}
+                className="basic-multi-select"
+                classNamePrefix="select"
+              />
             </div>
             <br />
             <div className="text-center">
