@@ -135,12 +135,32 @@ def delete_movie(request, pk):
     movie.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 # Search Movie
+
+from datetime import date
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def search_movie(request, title):
-    movies = Movie.objects.filter(title__istartswith=title)
+    # Get the current date
+    current_date = date.today()
+    
+    # Get the query parameter for date if provided
+    date_param = request.GET.get('date', None)
+    if date_param:
+        try:
+            # Convert date string to date object
+            date_filter = datetime.strptime(date_param, '%Y-%m-%d').date()
+        except ValueError:
+            return Response({'error': 'Invalid date format. Use YYYY-MM-DD.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Filter movies by title and show date after the provided date
+        movies = Movie.objects.filter(title__istartswith=title, shows__show_date__gte=date_filter)
+    else:
+        # Filter movies by title and release date before or on the current date
+        movies = Movie.objects.filter(title__istartswith=title, release_date__lte=current_date)
+
     if movies.exists():
         serializer = MovieSerializer(movies, many=True)
         return Response(serializer.data)
@@ -182,7 +202,6 @@ def accept_booking(request, pk):
         # Generate PDF for booking
         template = get_template('booking_details.html')
         qr_code_url = booking.booking_qr.url
-        print(qr_code_url)
         context = {'booking_data': booking, 'movie_instance': movie, 'booking_QR': qr_code_url}
         html_content = template.render(context)
 

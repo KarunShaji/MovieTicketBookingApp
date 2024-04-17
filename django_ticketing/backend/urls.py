@@ -14,6 +14,7 @@ urlpatterns = [
     path('delete/<int:pk>/',views.delete_movie, name='delete'),
     path('search/<str:title>/', views.search_movie, name='search'),
     
+    
     # Booking
 
     path('booking/<int:pk>/',views.accept_booking, name='booking'),

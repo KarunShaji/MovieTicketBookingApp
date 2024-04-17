@@ -244,32 +244,34 @@ function ViewMovie() {
                       <p>
                         <strong>Price :</strong> {post.price}
                       </p>
-
-                      <div className="show-time-container">
-                        <label>
-                          <strong>Show&nbsp;Time&nbsp;:&nbsp;</strong>
-                        </label>
-                        <select
-                          id="show-time"
-                          className="form-control"
-                          value={selectedShowTime}
-                          onChange={(e) => setSelectedShowTime(e.target.value)}
-                        >
-                          <option value="" disabled>
-                            Select Show Time
-                          </option>
-                          {Array.isArray(post.show_time) &&
-                            post.show_time.map((time) => (
-                              <option key={time} value={time}>
-                                {convertTo12HourFormat(time)}
-                              </option>
-                            ))}
-                        </select>
-                      </div>
                     </div>
-                    <br />
+                   
                     {post.availability && (
                       <>
+                        <div className="show-time-container">
+                          <label>
+                            <strong>Show&nbsp;Time&nbsp;:&nbsp;</strong>
+                          </label>
+                          <select
+                            id="show-time"
+                            className="form-control"
+                            value={selectedShowTime}
+                            onChange={(e) =>
+                              setSelectedShowTime(e.target.value)
+                            }
+                          >
+                            <option value="" disabled>
+                              Select Show Time
+                            </option>
+                            {Array.isArray(post.show_time) &&
+                              post.show_time.map((time) => (
+                                <option key={time} value={time}>
+                                  {convertTo12HourFormat(time)}
+                                </option>
+                              ))}
+                          </select>
+                        </div>
+                        <br />
                         <div style={{ display: "flex" }}>
                           <label style={{ paddingTop: "5px" }}>
                             <strong>Show&nbsp;Date&nbsp;:&nbsp;&nbsp;</strong>
@@ -331,9 +333,11 @@ function ViewMovie() {
               <div className="card-footer text-center">
                 {post.availability && (
                   <div>
-                    <button className="btn btn-info"
-                     onClick={makePayment}
-                     disabled={!showDate || !selectedShowTime}>
+                    <button
+                      className="btn btn-info"
+                      onClick={makePayment}
+                      disabled={!showDate || !selectedShowTime}
+                    >
                       Book Tickets
                     </button>
                   </div>
