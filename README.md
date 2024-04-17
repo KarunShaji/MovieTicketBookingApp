@@ -28,14 +28,6 @@ Welcome to the Movie Booking Website repository! This project is designed to pro
 - **Frontend**: React.js
 - **Database**: MySQL
 - **Payment Gateway**: Razorpay
-- **PDF Generation**: Django WeasyPrint
-- **Email Sending**: Django SMTP Email Backend
+- **PDF Generation**: Django xhtml2pdf
+- **Email Sending**: Django SMTP Email Backend ([MailTrap](https://mailtrap.io/))
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.x
-- Node.js
-- npm
-- MySQL

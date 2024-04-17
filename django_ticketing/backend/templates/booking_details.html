@@ -69,7 +69,7 @@
     <p>Time : {{ booking_data.booking_time }}</p>
     <p>Seats : {{ booking_data.seats_booked }}</p>
 <!-- Display the QR code using the provided URL -->
-<img src="{{ booking_data.booking_qr }}" alt="Booking QR Code">
+<img src="media/{{ booking_data.booking_qr }}" alt="Booking QR Code" width="250" height="250">
 </div>
 <!-- Copyright notice as footer -->
 <div class="copyright">© Cinemate. All rights reserved.</div>

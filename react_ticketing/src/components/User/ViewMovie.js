@@ -331,7 +331,9 @@ function ViewMovie() {
               <div className="card-footer text-center">
                 {post.availability && (
                   <div>
-                    <button className="btn btn-info" onClick={makePayment}>
+                    <button className="btn btn-info"
+                     onClick={makePayment}
+                     disabled={!showDate || !selectedShowTime}>
                       Book Tickets
                     </button>
                   </div>

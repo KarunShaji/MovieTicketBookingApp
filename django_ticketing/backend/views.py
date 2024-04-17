@@ -301,18 +301,3 @@ def user_bookings(request):
     return Response(serializer.data)
 
 
-# Generate PDF
-
-def generate_pdf(request,pk):
-    product = get_object_or_404(BookingRegister,pk=pk)
-
-    template = get_template('django_pdf_ticket.html')
-    html = template.render({'product': product})
-    buffer = BytesIO()
-    pisa_status = pisa.CreatePDF(html, dest=buffer)
-    if pisa_status.err:
-        return HttpResponse('PDF creation error!')
-    else:
-        response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(product.name)
-        return response
