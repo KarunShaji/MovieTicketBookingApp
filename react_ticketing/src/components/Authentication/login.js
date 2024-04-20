@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/authSlice";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
+import "./box.css";
 
 function Login() {
   const [username, setUsername] = useState("");

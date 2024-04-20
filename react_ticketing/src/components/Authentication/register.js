@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
+import "./box.css";
 
 function Register() {
   var [name, setName] = useState("");
@@ -89,7 +90,7 @@ function Register() {
             <br />
             <div className="form-group text-center">
               <button
-                className="btn btn-primary float-right"
+                className="btn btn-primary"
                 onClick={registerUser}
               >
                 Signup
