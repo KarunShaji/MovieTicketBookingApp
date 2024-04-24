@@ -55,7 +55,7 @@ function Login() {
     <div>
       <Navbar />
       <br />
-      <div className="container">
+      <div className="container container-login">
         <div className="row">
           <div className="col-8 offset-2">
             <h1 className="text-center">
