@@ -92,7 +92,7 @@ function MyBookings() {
       {bookings.length === 0 ? (
         <p className="text-center">You haven't booked any tickets yet.</p>
       ) : (
-        <ul className="col-14">
+        <ul className="col-12">
           {bookings.map((booking, index) => (
             <li key={index} className="booking-card">
               <div className="movie-poster">
